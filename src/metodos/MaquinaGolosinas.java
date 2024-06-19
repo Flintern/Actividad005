@@ -103,4 +103,28 @@ public void mostrarGolosinas() {
         } JOptionPane.showMessageDialog(null,mensaje); 
     }
 
+ public void rellenarGolosinas() {
+        String contrasena = JOptionPane.showInputDialog(
+        "Entre la contraseña");
+
+        if (contrasena.equals("Maquina2020")) {
+   
+            String codigo = JOptionPane.showInputDialog(
+        "Ingrese el código de la golosina (fila y columna, ej: 20): ");
+            int fila = Character.getNumericValue(codigo.charAt(0));
+            int columna = Character.getNumericValue(codigo.charAt(1));
+
+            if (fila >= 0 && fila < 4 && columna >= 0 && columna < 4) {
+                int nuevaCantidad = Integer.parseInt(JOptionPane.showInputDialog(
+                "Ingrese la nueva cantidad de " + nombresGolosinas[fila][columna] + ": "));
+                cantidad[fila][columna] = nuevaCantidad;
+                String info="La cantidad de " + nombresGolosinas[fila][columna] + " ha sido actualizada a " + nuevaCantidad;
+                JOptionPane.showMessageDialog(null,info);
+            } else {
+                JOptionPane.showMessageDialog(null,"Código inválido.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,"Contraseña incorrecta.");
+        }
+    }
 }
