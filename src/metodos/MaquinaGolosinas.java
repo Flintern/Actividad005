@@ -80,7 +80,7 @@ public class MaquinaGolosinas {
             if (cantidad[fila][columna] > 0) {
                 cantidad[fila][columna]--;
                 ventas[fila][columna]++;
-                info="Has comprado: " + nombresGolosinas[fila][columna] + " por "+precio[fila][columna]+" unidades.";
+                info="Has comprado: " + nombresGolosinas[fila][columna] + " por "+precio[fila][columna]+" pesitos.";
   
                 JOptionPane.showMessageDialog(null,info);
             } else {
@@ -90,7 +90,17 @@ public class MaquinaGolosinas {
         } else {
             JOptionPane.showMessageDialog(null,"Codigo invalido");
         }
+        
+        
     }
     
+public void mostrarGolosinas() {
+        String mensaje = "Golosinas disponibles: \n";
+        for (int i = 0; i < nombresGolosinas.length; i++) {
+            for (int j = 0; j < nombresGolosinas[i].length; j++) {
+                mensaje += "Código: " + i + j + " - Nombre: " + nombresGolosinas[i][j] + " - Precio: " + precio[i][j] + " - Cantidad: " + cantidad[i][j]+"\n";
+            }
+        } JOptionPane.showMessageDialog(null,mensaje); 
+    }
 
 }
