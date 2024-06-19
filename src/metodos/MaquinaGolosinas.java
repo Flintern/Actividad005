@@ -1,5 +1,8 @@
 package metodos;
 
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author jesus
@@ -9,6 +12,7 @@ public class MaquinaGolosinas {
     String nombresGolosinas[][];
     double precio[][];
     double cantidad[][];
+    double ventas[][];
 
     public MaquinaGolosinas() {
         this.nombresGolosinas = new String[][] {
@@ -33,7 +37,12 @@ public class MaquinaGolosinas {
             {5, 5, 5, 5}
 
         };
-
+        this.ventas = new double[][] {
+            {0, 0, 0, 0},
+            {0, 0, 0, 0},
+            {0, 0, 0, 0},
+            {0, 0, 0, 0}
+    };    
     }
 
     public String[][] getNombresGolosinas() {
@@ -60,7 +69,28 @@ public class MaquinaGolosinas {
         this.cantidad = cantidad;
     }
     
-   
+    public void pedirGolosina(JTextField jtfFila, JTextField jtfColumna) {
+ 
+        
+        int fila = Integer.parseInt(jtfFila.getText());
+        int columna = Integer.parseInt(jtfColumna.getText());
+        String info;
+
+        if (fila >= 0 && fila < 4 && columna >= 0 && columna < 4) {
+            if (cantidad[fila][columna] > 0) {
+                cantidad[fila][columna]--;
+                ventas[fila][columna]++;
+                info="Has comprado: " + nombresGolosinas[fila][columna] + " por "+precio[fila][columna]+" unidades.";
+  
+                JOptionPane.showMessageDialog(null,info);
+            } else {
+                info= "Lo siento, no quedan más " + nombresGolosinas[fila][columna];
+                JOptionPane.showMessageDialog(null,info );
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,"Codigo invalido");
+        }
+    }
     
 
 }
