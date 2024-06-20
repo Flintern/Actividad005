@@ -71,6 +71,14 @@ public class MaquinaGolosinas {
         this.cantidad = cantidad;
     }
 
+    public double[][] getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(double[][] ventas) {
+        this.ventas = ventas;
+    }
+
     public void pedirGolosina(JTextField jtfFila, JTextField jtfColumna) {
 
         int fila = Integer.parseInt(jtfFila.getText());
@@ -98,7 +106,7 @@ public class MaquinaGolosinas {
         String mensaje = "Golosinas disponibles: \n";
         for (int i = 0; i < nombresGolosinas.length; i++) {
             for (int j = 0; j < nombresGolosinas[i].length; j++) {
-                mensaje += "Código: " + i + j + " - Nombre: " + nombresGolosinas[i][j] + " - Precio: " + precio[i][j] + " - Cantidad: " + cantidad[i][j] + "\n";
+                mensaje += "Código: " + i + j + " - Nombre: " + nombresGolosinas[i][j] + " - Precio: $" + precio[i][j] + " - Cantidad: " + cantidad[i][j] + "\n";
             }
         }
         JOptionPane.showMessageDialog(null, mensaje);
@@ -133,7 +141,7 @@ public class MaquinaGolosinas {
         String ventasT = "Las ventas por golosinas son: \n";
         for (int i = 0; i < nombresGolosinas.length; i++) {
             for (int j = 0; j < nombresGolosinas[i].length; j++) {
-                ventasT += " - Nombre: " + nombresGolosinas[i][j] + " - Ventas por golosina" + ventas[i][j] * precio[i][j] + "\n";
+                ventasT += " - Nombre: " + nombresGolosinas[i][j] + " - Vendidas " + ventas[i][j] + " - Ventas por golosina $" + ventas[i][j] * precio[i][j] + "\n";
 
             }
         }
@@ -143,32 +151,31 @@ public class MaquinaGolosinas {
     public void ventasEstadisticas() {
         String estadistica;
         double ventasTotales = 0;
+        double golovendi = 0;
         for (int i = 0; i < nombresGolosinas.length; i++) {
             for (int j = 0; j < nombresGolosinas[i].length; j++) {
                 ventasTotales += ventas[i][j] * precio[i][j];
+                golovendi += ventas[i][j];
 
             }
 
         }
-        estadistica = "Las ventas y total acumulado son: \n" + ventasTotales;
+        estadistica = "Las ventas son: \n$" + ventasTotales + "\nLa cantidad vendida de golosinas es: \n" + golovendi;
         JOptionPane.showMessageDialog(null, estadistica);
 
     }
-   
-    
 
     public void setLlenarJTable(JTable tabla) {
-        String[][]nombreyprecio= new String[4][4];
-        for (int i=0;i<=3;i++){
-            for (int j=0;j<=3;j++){
-            nombreyprecio[i][j]=nombresGolosinas[i][j]+"\n $"+precio[i][j];
+        String[][] nombreyprecio = new String[4][4];
+        for (int i = 0; i <= 3; i++) {
+            for (int j = 0; j <= 3; j++) {
+                nombreyprecio[i][j] = nombresGolosinas[i][j] + "\n $" + precio[i][j];
             }
         }
         String[] columnas = {"Columna 0", "Columna 1", "Columna 2", "Columna 3"};
         DefaultTableModel miModelo = new DefaultTableModel(nombreyprecio, columnas);
         tabla.setModel(miModelo);
- 
+
     }
-    
 
 }
