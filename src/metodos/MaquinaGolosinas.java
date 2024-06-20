@@ -1,7 +1,9 @@
 package metodos;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -9,10 +11,10 @@ import javax.swing.JTextField;
  */
 public class MaquinaGolosinas {
 
-    String nombresGolosinas[][];
-    double precio[][];
-    double cantidad[][];
-    double ventas[][];
+    private String nombresGolosinas[][];
+    private double precio[][];
+    private double cantidad[][];
+    private double ventas[][];
 
     public MaquinaGolosinas() {
         this.nombresGolosinas = new String[][]{
@@ -134,8 +136,10 @@ public class MaquinaGolosinas {
                 ventasT += " - Nombre: " + nombresGolosinas[i][j] + " - Ventas por golosina" + ventas[i][j] * precio[i][j] + "\n";
 
             }
-        }JOptionPane.showMessageDialog(null,ventasT );
+        }
+        JOptionPane.showMessageDialog(null, ventasT);
     }
+
     public void ventasEstadisticas() {
         String estadistica;
         double ventasTotales = 0;
@@ -144,11 +148,27 @@ public class MaquinaGolosinas {
                 ventasTotales += ventas[i][j] * precio[i][j];
 
             }
-          
-        }  estadistica= "Las ventas y total acumulado son: \n"+ventasTotales;
-        JOptionPane.showMessageDialog(null,estadistica );
-         
-    }
 
+        }
+        estadistica = "Las ventas y total acumulado son: \n" + ventasTotales;
+        JOptionPane.showMessageDialog(null, estadistica);
+
+    }
+   
     
+
+    public void setLlenarJTable(JTable tabla) {
+        String[][]nombreyprecio= new String[4][4];
+        for (int i=0;i<=3;i++){
+            for (int j=0;j<=3;j++){
+            nombreyprecio[i][j]=nombresGolosinas[i][j]+"\n $"+precio[i][j];
+            }
+        }
+        String[] columnas = {"Columna 0", "Columna 1", "Columna 2", "Columna 3"};
+        DefaultTableModel miModelo = new DefaultTableModel(nombreyprecio, columnas);
+        tabla.setModel(miModelo);
+ 
+    }
+    
+
 }
